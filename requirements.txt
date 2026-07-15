@@ -1,7 +1,8 @@
+streamlit
 pandas
 numpy
+plotly
 sqlalchemy
 pymysql
-streamlit
-plotly
+mysql-connector-python
 boto3
