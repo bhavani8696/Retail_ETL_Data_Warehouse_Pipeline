@@ -1,0 +1,62 @@
+/* Main Background */
+.stApp {
+    background-color: #0f172a;
+    color: white;
+}
+
+/* All Text */
+html, body, [class*="css"] {
+    color: white !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Paragraphs */
+p, label, span, div {
+    color: #f8fafc !important;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background: #111827;
+}
+
+section[data-testid="stSidebar"] * {
+    color: white !important;
+}
+
+/* Metric Cards */
+[data-testid="metric-container"] {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #334155;
+}
+
+[data-testid="metric-container"] label,
+[data-testid="metric-container"] div {
+    color: white !important;
+}
+
+/* Tables */
+[data-testid="stDataFrame"] {
+    background: white;
+}
+
+/* Buttons */
+.stButton button,
+.stDownloadButton button {
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+
+/* Success Box */
+.stAlert {
+    color: white !important;
+}
