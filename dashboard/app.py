@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import mysql.connector
 import plotly.express as px
 
 # --------------------------------------------------
@@ -30,43 +29,21 @@ load_css()
 # --------------------------------------------------
 # MYSQL CONNECTION
 # --------------------------------------------------
-conn = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="root",
-    database="retail_dw"
-)
 
 # --------------------------------------------------
 # LOAD DATA
 # --------------------------------------------------
-query = """
-SELECT
-    f.sales,
-    f.profit,
-    f.quantity,
-    f.discount,
-    d.year,
-    p.category,
-    p.sub_category,
-    p.product_name,
-    c.customer_name,
-    s.region,
-    s.country,
-    s.state,
-    s.city
-FROM fact_sales f
-JOIN dim_customer c
-ON f.customer_key = c.customer_key
-JOIN dim_product p
-ON f.product_key = p.product_key
-JOIN dim_store s
-ON f.store_key = s.store_key
-JOIN dim_date d
-ON f.date_key = d.date_key
-"""
+df = pd.read_csv("data/processed/clean_orders.csv")
 
-df = pd.read_sql(query, conn)
+# Convert column names to lowercase
+df.columns = df.columns.str.strip().str.lower()
+
+# Rename columns used in dashboard
+df.rename(columns={
+    "customer_name": "customer_name",
+    "product_name": "product_name",
+    "sub_category": "sub_category"
+}, inplace=True)
 # -----------------------------------
 # TITLE
 # -----------------------------------
@@ -276,7 +253,6 @@ st.dataframe(
 # -----------------------------------
 # CLOSE DATABASE CONNECTION
 # -----------------------------------
-conn.close()
 # -----------------------------------
 # DOWNLOAD DATASET
 # -----------------------------------
@@ -370,4 +346,3 @@ fig = px.bar(
 )
 
 st.plotly_chart(fig, use_container_width=True)
-conn.close()
